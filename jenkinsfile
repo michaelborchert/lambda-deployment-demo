@@ -2,7 +2,7 @@ def bucket = 'mborch-lambda-deploy-demo'
 def functionName = 'Fibonacci'
 def region = 'ap-southeast-1'
 
-node('slaves'){
+node('master'){
     stage('Checkout'){
         checkout scm
     }
