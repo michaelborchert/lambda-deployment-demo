@@ -1,6 +1,6 @@
-def bucket = 'deployment-packages-mlabouardy'
+def bucket = 'mborch-lambda-deploy-demo'
 def functionName = 'Fibonacci'
-def region = 'eu-west-3'
+def region = 'ap-southeast-1'
 
 node('slaves'){
     stage('Checkout'){
