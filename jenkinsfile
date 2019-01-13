@@ -1,4 +1,4 @@
-def bucket = 'mborch-lambda-deploy-demo'
+def bucket = 'mborch-lambda-deployment-demo'
 def functionName = 'DeploymentTest'
 def region = 'ap-southeast-1'
 
