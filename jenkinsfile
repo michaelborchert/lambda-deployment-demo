@@ -1,5 +1,5 @@
 def bucket = 'mborch-lambda-deploy-demo'
-def functionName = 'Fibonacci'
+def functionName = 'DeploymentTest'
 def region = 'ap-southeast-1'
 
 node('master'){
@@ -7,17 +7,8 @@ node('master'){
         checkout scm
     }
 
-    stage('Test'){
-        sh 'GOPATH=${WORKSPACE} go get -u github.com/golang/lint/golint'
-        sh 'go get -t ./...'
-        sh 'golint -set_exit_status'
-        sh 'go vet .'
-        sh 'go test .'
-    }
-
     stage('Build'){
-        sh 'GOOS=linux go build -o main main.go'
-        sh "zip ${commitID()}.zip main"
+        sh "zip ${commitID()}.zip lambda_function.py"
     }
 
     stage('Push'){
