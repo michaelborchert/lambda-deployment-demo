@@ -17,3 +17,4 @@ phases:
 artifacts:
   files:
     - ${CODEBUILD_RESOLVED_SOURCE_VERSION}.zip
+    - '**/*'
