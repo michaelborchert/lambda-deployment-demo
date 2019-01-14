@@ -1,0 +1,17 @@
+version: 0.2
+
+env:
+  variables:
+    bucket: 'mborch-lambda-deployment-demo'
+    functionName: 'DeploymentTest'
+    region: 'ap-southeast-1'
+    testAlias: 'test'
+    prodAlias: 'prod'
+
+phases:
+  build:
+    commands:
+      - LATEST_VERSION=$(aws lambda get-alias --function-name ${functionName} --name ${testAlias} --region ${region} --query 'FunctionVersion' | sed "s/\"//g")
+      - aws lambda update-alias --name ${prodAlias} --function-name ${functionName} --routing-config AdditionalVersionWeights={${LATEST_VERSION}=0.05} --region ${region}
+      - sleep 10
+      - aws lambda update-alias --name ${prodAlias} --function-name ${functionName} --function-version ${LATEST_VERSION} --routing-config AdditionalVersionWeights={} --region ${region}
