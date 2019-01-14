@@ -29,7 +29,7 @@ node('master'){
             --name ${testAlias} \
             --function-name ${functionName} \
             --function-version ${LATEST_VERSION} \
-            --routing-config '' \
+            --routing-config AdditionalVersionWeights={} \
             --region ${region}"
     }
 }
