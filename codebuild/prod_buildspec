@@ -15,3 +15,6 @@ phases:
       - aws lambda update-alias --name ${prodAlias} --function-name ${functionName} --routing-config AdditionalVersionWeights={${LATEST_VERSION}=0.05} --region ${region}
       - sleep 10
       - aws lambda update-alias --name ${prodAlias} --function-name ${functionName} --function-version ${LATEST_VERSION} --routing-config AdditionalVersionWeights={} --region ${region}
+artifacts:
+  files:
+    - '**/*'
