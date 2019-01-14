@@ -4,7 +4,7 @@ def lambda_handler(event, context):
     if event:
         return json.dumps(event)
     else:
-        return {'body': 'No events received.'}
+        return {'body': 'No event received.'}
 
     return {
         'statusCode': 200,
