@@ -1,0 +1,14 @@
+version: 0.2
+
+env:
+  variables:
+    bucket: 'mborch-lambda-deployment-demo'
+    functionName: 'DeploymentTest'
+    region: 'ap-southeast-1'
+
+phases:
+  build:
+    - zip ${CODEBUILD_SOURCE_VERSION}.zip lambda_function.py
+    - aws s3 cp ${CODEBUILD_SOURCE_VERSION}.zip s3://${bucket}
+  post_build:
+    - aws lambda update-function-code --function-name ${functionName} --s3-bucket ${bucket} --s3-key ${CODEBUILD_SOURCE_VERSION}.zip --region ${region}
