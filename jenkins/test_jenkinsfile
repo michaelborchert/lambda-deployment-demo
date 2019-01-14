@@ -12,6 +12,7 @@ node('master'){
         LATEST_VERSION = sh (
           script: "aws lambda publish-version \
                     --function-name ${functionName} \
+                    --region ${region} \
                     --query 'Version'",
           returnStdout: true
         ).trim()
@@ -21,13 +22,15 @@ node('master'){
         sh "aws lambda update-alias \
             --name ${testAlias} \
             --function-name ${functionName} \
-            --routing-config AdditionalVersionWeights={${LATEST_VERSION}=0.05}"
+            --routing-config AdditionalVersionWeights={${LATEST_VERSION}=0.05} \
+            --region ${region}"
         sleep 2 minutes
         sh "aws lambda update-alias \
             --name ${testAlias} \
             --function-name ${functionName} \
-            --routing-config AdditionalVersionWeights={${LATEST_VERSION}=1}"
-
+            --function-version ${LATEST_VERSION} \
+            --routing-config '' \
+            --region ${region}"
     }
 }
 
