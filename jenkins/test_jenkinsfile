@@ -12,7 +12,7 @@ node('master'){
         LATEST_VERSION = sh (
           script: "aws lambda publish-version \
                     --function-name ${functionName} \
-                    --query 'Version'"
+                    --query 'Version'",
           returnStdout: true
         ).trim()
     }
