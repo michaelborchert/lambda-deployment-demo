@@ -20,6 +20,8 @@ node('master'){
                 --s3-bucket ${bucket} \
                 --s3-key ${commitID()}.zip \
                 --region ${region}"
+        sh "aws lambda publish-version \
+            --function-name ${functionName}"
     }
 }
 
