@@ -8,7 +8,9 @@ env:
 
 phases:
   build:
-    - zip ${CODEBUILD_SOURCE_VERSION}.zip lambda_function.py
-    - aws s3 cp ${CODEBUILD_SOURCE_VERSION}.zip s3://${bucket}
+    commands:
+      - zip ${CODEBUILD_SOURCE_VERSION}.zip lambda_function.py
+      - aws s3 cp ${CODEBUILD_SOURCE_VERSION}.zip s3://${bucket}
   post_build:
-    - aws lambda update-function-code --function-name ${functionName} --s3-bucket ${bucket} --s3-key ${CODEBUILD_SOURCE_VERSION}.zip --region ${region}
+    commands:
+      - aws lambda update-function-code --function-name ${functionName} --s3-bucket ${bucket} --s3-key ${CODEBUILD_SOURCE_VERSION}.zip --region ${region}
