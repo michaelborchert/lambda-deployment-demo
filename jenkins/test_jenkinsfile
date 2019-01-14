@@ -9,6 +9,7 @@ node('master'){
     }
 
     stage('Publish'){
+        sh "pip install aws-cli"
         LATEST_VERSION = sh (
           script: "aws lambda publish-version \
                     --function-name ${functionName} \
