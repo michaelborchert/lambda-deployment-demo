@@ -13,4 +13,4 @@ phases:
       - LATEST_VERSION=$(aws lambda publish-version --function-name ${functionName} --region ${region} --query 'Version' | sed "s/\"//g")
       - aws lambda update-alias --name ${testAlias} --function-name ${functionName} --routing-config AdditionalVersionWeights={${LATEST_VERSION}=0.05} --region ${region}
       - sleep 10
-      - aws lambda update-alias --name ${testAlias} --function-name ${functionName} --function-version ${LATEST_VERSION} --routing-config AdditionalVersionWeights={} --region ${region}"
+      - aws lambda update-alias --name ${testAlias} --function-name ${functionName} --function-version ${LATEST_VERSION} --routing-config AdditionalVersionWeights={} --region ${region}
