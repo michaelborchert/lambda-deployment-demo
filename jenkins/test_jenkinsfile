@@ -10,7 +10,7 @@ node('master'){
 
     stage('Publish'){
         LATEST_VERSION = sh (
-          script = "aws lambda publish-version \
+          script: "aws lambda publish-version \
                     --function-name ${functionName} \
                     --query 'Version'"
           returnStdout: true
